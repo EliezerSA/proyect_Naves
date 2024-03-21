@@ -1,5 +1,6 @@
 package org.eliezer.springcloud.msvc.naves.services;
 
+import org.eliezer.springcloud.msvc.naves.models.Tripulante;
 import org.eliezer.springcloud.msvc.naves.models.entity.Nave;
 
 import java.util.List;
@@ -15,4 +16,10 @@ public interface NaveService {
     Optional<Nave> porId(Long id);
     Nave guardar(Nave nave);
     void eliminar(Long id);
+
+
+    //Metodo para obtener de otro servicio en este caso cliente
+    Optional<Tripulante> asignarTripulante(Tripulante tripulante, Long naveId);
+    Optional<Tripulante> crearTripulante(Tripulante tripulante, Long naveId);
+    Optional<Tripulante> eliminarTripulante(Tripulante tripulante, Long naveId);
 }

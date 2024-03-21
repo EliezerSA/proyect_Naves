@@ -1,6 +1,8 @@
 package org.eliezer.springcloud.msvc.naves.controllers;
 
+import feign.FeignException;
 import jakarta.validation.Valid;
+import org.eliezer.springcloud.msvc.naves.models.Tripulante;
 import org.eliezer.springcloud.msvc.naves.models.entity.Nave;
 import org.eliezer.springcloud.msvc.naves.services.NaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Autor: Eliezer Santiago
@@ -72,6 +71,55 @@ public class NaveController {
         if(f.isPresent()){
             service.eliminar(f.get().getId());
             return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    //Metodos de mapaeo de los nuevos metodos de la relacion tripulante y naves
+    @PutMapping("/asignar-tripulante/{naveId}")
+    public ResponseEntity<?> asignarTripulante(@RequestBody Tripulante tripulante, @PathVariable Long naveId){
+        Optional<Tripulante> o;
+        try {
+            o = service.asignarTripulante(tripulante, naveId);
+        }catch (FeignException e){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("mensaje", "No existe el tripulante por " +
+                            "el id o error en la comunicacion: " + e.getMessage() ));
+        }
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/crear-tripulante/{naveId}")
+    public ResponseEntity<?> crearCliente(@RequestBody Tripulante tripulante, @PathVariable Long naveId){
+        Optional<Tripulante> o;
+        try {
+            o = service.crearTripulante(tripulante, naveId);
+        }catch (FeignException e){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("mensaje", "No se pudo crear el tripulante " +
+                            "o error en la comunicacion: " + e.getMessage() ));
+        }
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/eliminar-tripulante/{naveId}")
+    public ResponseEntity<?> eliminarCliente(@RequestBody Tripulante tripulante, @PathVariable Long naveId){
+        Optional<Tripulante> o;
+        try {
+            o = service.eliminarTripulante(tripulante, naveId);
+        }catch (FeignException e){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("mensaje", "No existe el tripulante por " +
+                            "el id o error en la comunicacion: " + e.getMessage() ));
+        }
+        if(o.isPresent()){
+            return ResponseEntity.status(HttpStatus.OK).body(o.get());
         }
         return ResponseEntity.notFound().build();
     }
