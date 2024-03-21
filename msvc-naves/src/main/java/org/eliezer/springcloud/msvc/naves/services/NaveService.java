@@ -1,6 +1,6 @@
 package org.eliezer.springcloud.msvc.naves.services;
 
-import org.eliezer.springcloud.msvc.naves.entity.Nave;
+import org.eliezer.springcloud.msvc.naves.models.entity.Nave;
 
 import java.util.List;
 import java.util.Optional;

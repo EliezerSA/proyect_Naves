@@ -1,6 +1,6 @@
 package org.eliezer.springcloud.msvc.naves.services;
 
-import org.eliezer.springcloud.msvc.naves.entity.Nave;
+import org.eliezer.springcloud.msvc.naves.models.entity.Nave;
 import org.eliezer.springcloud.msvc.naves.repositories.NaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package org.eliezer.springcloud.msvc.naves.controllers;
 
 import jakarta.validation.Valid;
-import org.eliezer.springcloud.msvc.naves.entity.Nave;
+import org.eliezer.springcloud.msvc.naves.models.entity.Nave;
 import org.eliezer.springcloud.msvc.naves.services.NaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

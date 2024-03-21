@@ -49,7 +49,7 @@ public class TripulanteController {
         if (!tripulante.getApellidoPaterno().isEmpty() && service.porApellidoPaterno(tripulante.getApellidoPaterno()).isPresent()) {
             return ResponseEntity.badRequest()
                     .body(Collections
-                            .singletonMap("mensaje", "Ya existe un cliente con ese apellido paterno"));
+                            .singletonMap("mensaje", "Ya existe un tripulante con ese apellido paterno"));
         }
         if (result.hasErrors()) {//Si hay errores en los campos
             return validar(result);
@@ -73,7 +73,7 @@ public class TripulanteController {
                     service.porApellidoPaterno(tripulante.getApellidoPaterno()).isPresent()) {
                 return ResponseEntity.badRequest()
                         .body(Collections
-                                .singletonMap("mensaje", "Ya existe un cliente con ese apellido paterno"));
+                                .singletonMap("mensaje", "Ya existe un tripulante con ese apellido paterno"));
             }
             tripulanteDb.setNombre(tripulante.getNombre());
             tripulanteDb.setApellidoPaterno(tripulante.getApellidoPaterno());
