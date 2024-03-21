@@ -93,7 +93,7 @@ public class NaveController {
     }
 
     @PostMapping("/crear-tripulante/{naveId}")
-    public ResponseEntity<?> crearCliente(@RequestBody Tripulante tripulante, @PathVariable Long naveId){
+    public ResponseEntity<?> crearTripulante(@RequestBody Tripulante tripulante, @PathVariable Long naveId){
         Optional<Tripulante> o;
         try {
             o = service.crearTripulante(tripulante, naveId);
@@ -109,7 +109,7 @@ public class NaveController {
     }
 
     @DeleteMapping("/eliminar-tripulante/{naveId}")
-    public ResponseEntity<?> eliminarCliente(@RequestBody Tripulante tripulante, @PathVariable Long naveId){
+    public ResponseEntity<?> eliminarTripulante(@RequestBody Tripulante tripulante, @PathVariable Long naveId){
         Optional<Tripulante> o;
         try {
             o = service.eliminarTripulante(tripulante, naveId);
